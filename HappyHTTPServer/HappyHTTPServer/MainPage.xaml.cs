@@ -26,5 +26,10 @@ namespace HappyHTTPServer
         {
             this.InitializeComponent();
         }
+
+        private async void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(PlayPage));
+        }
     }
 }

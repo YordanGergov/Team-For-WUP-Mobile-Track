@@ -8,7 +8,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button></Button>
-        <Button></Button>
+        <Button x:Name="dummyButton"
+                Click="OnButtonClick"
+                Height="50"
+                Width="50"
+                Background="Pink"
+            ></Button>
+        
     </Grid>
 </Page>
