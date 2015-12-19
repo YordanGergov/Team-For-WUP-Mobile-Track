@@ -15,24 +15,11 @@
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Navigation;
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Tutorial : Page
     {
-        public MainPage()
+        public Tutorial()
         {
             this.InitializeComponent();
-        }
-    
-        private async void OnButtonClickPlay(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(PlayPage));
-        }
-       
-        private async void OnButtonClickTutorial(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Tutorial));
         }
     }
 }

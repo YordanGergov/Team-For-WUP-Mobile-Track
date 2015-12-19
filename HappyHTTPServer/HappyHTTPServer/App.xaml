@@ -7,5 +7,11 @@
 
     <Application.Resources>
         <ImageBrush x:Key="HappyServer" ImageSource="/Images/server.png"/>
+        
+        <Style x:Key="TutotialTextStyle"
+               TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>
