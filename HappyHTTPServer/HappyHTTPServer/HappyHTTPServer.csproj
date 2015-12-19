@@ -100,17 +100,14 @@
     </Compile>
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
-    <Compile Include="HowToPlayFirst.xaml.cs">
-      <DependentUpon>HowToPlayFirst.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HowToPlaySecond.xaml.cs">
-      <DependentUpon>HowToPlaySecond.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HowToPlayThird.xaml.cs">
-      <DependentUpon>HowToPlayThird.xaml</DependentUpon>
+    <Compile Include="Tutorial.xaml.cs">
+      <DependentUpon>Tutorial.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TabHeader.xaml.cs">
+      <DependentUpon>TabHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayPage.xaml.cs">
       <DependentUpon>PlayPage.xaml</DependentUpon>
@@ -141,21 +138,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HowToPlayFirst.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HowToPlaySecond.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="HowToPlayThird.xaml">
+    <Page Include="Tutorial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TabHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PlayPage.xaml">
       <SubType>Designer</SubType>

@@ -18,7 +18,17 @@
                 Width="50"
                 Background="Pink"
                 Grid.Row="0"
+                Content="Play"
             ></Button>
         
+        <Button x:Name="dummyButton2"
+                Click="OnButtonClick"
+                Height="50"
+                Width="50"
+                Background="Pink"
+                Grid.Row="2"
+                Content="Tutorial"
+            ></Button>
+            
     </Grid>
 </Page>

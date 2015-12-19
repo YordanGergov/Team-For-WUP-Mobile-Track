@@ -27,7 +27,17 @@
 
         private async void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(PlayPage));
+            Frame.Navigate(typeof(Tutorial));
         }
+
+    //   private async void OnButtonClickPlay(object sender, RoutedEventArgs e)
+    //   {
+    //       Frame.Navigate(typeof(PlayPage));
+    //   }
+    //
+    //   private async void OnButtonClickTutorial(object sender, RoutedEventArgs e)
+    //   {
+    //       Frame.Navigate(typeof(Tutorial));
+    //   }
     }
 }
