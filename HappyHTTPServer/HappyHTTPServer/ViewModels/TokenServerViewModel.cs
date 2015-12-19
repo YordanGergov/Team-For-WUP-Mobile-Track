@@ -12,9 +12,9 @@
 
         private double scaleHeight;
 
-        private double top;
+        private double topSize;
 
-        private double left;
+        private double leftSize;
 
         public double ScaleWidth
         {
@@ -42,29 +42,29 @@
             }
         }
 
-        public double Top
+        public double TopSize
         {
             get
             {
-                return this.top;
+                return this.topSize;
             }
             set
             {
-                this.top = value;
-                this.OnPropertyChanged("Top");
+                this.topSize = value;
+                this.OnPropertyChanged("TopSize");
             }
         }
 
-        public double Left
+        public double LeftSize
         {
             get
             {
-                return this.left;
+                return this.leftSize;
             }
             set
             {
-                this.left = value;
-                this.OnPropertyChanged("Left");
+                this.leftSize = value;
+                this.OnPropertyChanged("LeftSize");
             }
         }
     }

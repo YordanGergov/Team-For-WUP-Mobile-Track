@@ -39,8 +39,8 @@
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AccelerometerReading reading = e.Reading;
-                var top = Canvas.GetTop(Test);
-                var left = Canvas.GetLeft(Test);                
+                var top = Canvas.GetTop(HappyServer);
+                var left = Canvas.GetLeft(HappyServer);                
                 var x = reading.AccelerationX;
                 var y = reading.AccelerationY;
                 var z = reading.AccelerationZ;
@@ -48,7 +48,7 @@
                 var rollAngle = Math.Atan2(y, z) * (180 / Math.PI);
                 double newTop = top;
                 double newLeft = left;
-                var speed = 0.01;
+                var speed = 0.02;
 
                 if (rollAngle < -100)
                 {
@@ -67,8 +67,20 @@
                 {
                     newLeft -= speed * (pitchAngle - 90);
                 }
-                Canvas.SetLeft(Test, newLeft);
-                Canvas.SetTop(Test, newTop);
+                
+                this.happyServerVM.TopSize = newTop + this.HappyServer.Height;
+                this.happyServerVM.LeftSize = newLeft + this.HappyServer.Width;
+
+                //// the following is to stop our object not to go outside of the canvas
+                if (this.happyServerVM.TopSize > this.HappyServer.Height && this.happyServerVM.TopSize < this.Field.ActualHeight)
+                {
+                    Canvas.SetTop(HappyServer, newTop);
+                }
+
+                if (this.happyServerVM.LeftSize > this.HappyServer.Width && this.happyServerVM.LeftSize < this.Field.ActualWidth)
+                {
+                    Canvas.SetLeft(HappyServer, newLeft);
+                }
 
                 this.DataContext = this.happyServerVM;
                 
