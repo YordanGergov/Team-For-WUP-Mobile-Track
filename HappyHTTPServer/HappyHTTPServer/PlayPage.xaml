@@ -21,6 +21,7 @@
                     <ScaleTransform ScaleX="{Binding Path=Width}" ScaleY="{Binding Path=Width}"/>
                 </Ellipse.RenderTransform>-->
             </Ellipse>
+
         </Canvas>
     </Grid>
 </Page>
