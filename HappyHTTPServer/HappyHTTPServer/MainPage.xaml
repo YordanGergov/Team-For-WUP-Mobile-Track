@@ -13,7 +13,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="dummyButton"
-                Click="OnButtonClick"
+                Click="OnButtonClickPlay"
                 Height="50"
                 Width="50"
                 Background="Pink"
@@ -22,9 +22,9 @@
             ></Button>
         
         <Button x:Name="dummyButton2"
-                Click="OnButtonClick"
+                Click="OnButtonClickTutorial"
                 Height="50"
-                Width="50"
+                Width="150"
                 Background="Pink"
                 Grid.Row="2"
                 Content="Tutorial"
