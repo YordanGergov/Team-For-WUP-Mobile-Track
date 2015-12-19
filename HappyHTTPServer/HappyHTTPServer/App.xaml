@@ -5,4 +5,7 @@
     xmlns:local="using:HappyHTTPServer"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ImageBrush x:Key="HappyServer" ImageSource="/Images/server.png"/>
+    </Application.Resources>
 </Application>
