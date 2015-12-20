@@ -386,7 +386,7 @@
                 <PivotItem.Header>
                     <local:TabHeader Label="Tutorial 1/4" Glyph="&#xE8F1;" />
                 </PivotItem.Header>
-                <Grid Background="#e1dcdc" >
+                <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
                     Text="However, it does not work as pause. Hence, the position of the server and the requests and upgrades will be reset to initial position. How to play: Long Tap ->makes the Happy HTTP Server bigger so we can collect more good requests. Double Tap -> shrinks the Happy HTTP Server to minimum size so we can avoid bad requests easier. Pinch in -> switch to the city on the right Pinch out -> switch to the city on the left We move our Happy HTTP Server with the Accelerometer.
@@ -414,7 +414,7 @@
                 <PivotItem.Header>
                     <local:TabHeader Label="Tutorial 3/4" Glyph="&#xE8F1;" />
                 </PivotItem.Header>
-                <Grid Background="#e1dcdc" >
+                <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
                     Text="3rd page he successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
@@ -427,7 +427,7 @@
                 <PivotItem.Header>
                     <local:TabHeader Label="Tutorial 4/4" Glyph="&#xE8F1;" />
                 </PivotItem.Header>
-                <Grid Background="#e1dcdc" >
+                <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
                     Text="4th page The successful requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
