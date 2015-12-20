@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel;
-
+    using System.Linq.Expressions;
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
