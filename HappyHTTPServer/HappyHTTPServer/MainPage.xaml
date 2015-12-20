@@ -27,24 +27,27 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" VerticalAlignment="Stretch">
-            <Button x:Name="dummyButton"
-                Click="OnButtonClickPlay"
-                Margin="0, 10, 0, 10"
-                Content="Play"/>
-
-            <Button x:Name="dummyButton2"
-                Click="OnButtonClickTutorial"
-                Content="Tutorial"/>
-
-            <Button x:Name="dummyButton3"
-                Click="OnButtonClickHttpEncyclopedia"
-                Content="Encyclopedia"/>
-        </ListBox>
-
-
         <Image VerticalAlignment="Center"
                Source="/images/HappyHTTPServerMainPage.png" 
-               Grid.Row="1"/>
+               Grid.Row="0"/>
+        <ListBox Grid.Row="1" VerticalAlignment="Stretch">
+            <Button x:Name="playButton"
+                Click="OnButtonClickPlay"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Play"/>
+
+            <Button x:Name="tutorialButton"
+                Click="OnButtonClickTutorial"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Tutorial"/>
+
+            <Button x:Name="encyclopediaButton"
+                Click="OnButtonClickHttpEncyclopedia"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Encyclopedia"/>
+        </ListBox>
     </Grid>
 </Page>

@@ -6,8 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button"  BasedOn="{StaticResource ButtonStyle}" />
+            <Style TargetType="StackPanel" BasedOn="{StaticResource StackPanelStyle}"/>
+            <Style TargetType="Image" BasedOn="{StaticResource ImageStyle}"/>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}"/>
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxStyle}"/>
+        </ResourceDictionary>
+    </Page.Resources>
 
-    <Grid Background="#FEFEA7" >
+    <Grid Background="#FF34323F" >
         <Button x:Name="RunButton" Content="Ask Wikipedia for all status codes" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="46" Click="RunButtonClick"/>
         <ScrollViewer Margin="10,61,10,10">
             <TextBlock x:Name="ResultTextBlock" TextWrapping="Wrap" Text="" />
