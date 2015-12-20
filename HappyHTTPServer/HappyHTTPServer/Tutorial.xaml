@@ -401,10 +401,10 @@
                 <PivotItem.Header>
                     <local:TabHeader Label="Tutorial 2/4" Glyph="&#xE8F1;" />
                 </PivotItem.Header>
-                <Grid Background="#e1dcdc" >
+                <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="2nd page ccessfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
+                    Text="2nd page successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
                         The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
                     Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
@@ -430,8 +430,8 @@
                 <Grid Background="#e1dcdc" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="4th page The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                        The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
+                    Text="4th page The successful requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
+                        The successful requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
                     Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
                 </Grid>

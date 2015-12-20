@@ -7,28 +7,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button"  BasedOn="{StaticResource ButtonStyle}" />
+            <Style TargetType="StackPanel" BasedOn="{StaticResource StackPanelStyle}"/>
+            <Style TargetType="Image" BasedOn="{StaticResource ImageStyle}"/>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}"/>
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource PasswordBoxStyle}"/>
+        </ResourceDictionary>
+    </Page.Resources>
+
+
+    <Grid Background="#FEFEA7">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button x:Name="dummyButton"
+        <ListBox Grid.Row="0" VerticalAlignment="Stretch">
+            <Button x:Name="dummyButton"
                 Click="OnButtonClickPlay"
-                Height="50"
-                Width="50"
-                Background="Pink"
-                Grid.Row="0"
-                Content="Play"
-            ></Button>
-        
-        <Button x:Name="dummyButton2"
+                Margin="0, 10, 0, 10"
+                Content="Play"/>
+
+            <Button x:Name="dummyButton2"
                 Click="OnButtonClickTutorial"
-                Height="50"
-                Width="150"
-                Background="Pink"
-                Grid.Row="2"
-                Content="Tutorial"
-            ></Button>
-            
+                Content="Tutorial"/>
+        </ListBox>
+
+
+        <Image VerticalAlignment="Center"
+               Source="/images/HappyHTTPServerMainPage.png" 
+               Grid.Row="1"/>
     </Grid>
 </Page>
