@@ -3,9 +3,6 @@
 
     public class SecurityUpgradesViewModel : BaseViewModel
     {
-        public const int Value = 3;
-        public const double Frequency = 0.4;
-
         private double top;
 
         private double left;

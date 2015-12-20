@@ -2,9 +2,6 @@
 {
     public class HttpRequestsFromFriendsVM : BaseViewModel
     {
-        public const int Value = 2;
-        public const double Frequency = 0.6;
-
         private double top;
 
         private double left;

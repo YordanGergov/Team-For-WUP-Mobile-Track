@@ -2,9 +2,6 @@
 {
     public class BadRequestsViewModel : BaseViewModel
     {
-        public const int Value = 2;
-        public const double Frequency = 0.7;
-
         private double top;
 
         private double left;
