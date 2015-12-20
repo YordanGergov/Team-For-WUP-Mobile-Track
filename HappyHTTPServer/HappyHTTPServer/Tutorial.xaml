@@ -389,11 +389,8 @@
                 <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="However, it does not work as pause. Hence, the position of the server and the requests and upgrades will be reset to initial position. How to play: Long Tap ->makes the Happy HTTP Server bigger so we can collect more good requests. Double Tap -> shrinks the Happy HTTP Server to minimum size so we can avoid bad requests easier. Pinch in -> switch to the city on the right Pinch out -> switch to the city on the left We move our Happy HTTP Server with the Accelerometer.
-                           The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                            The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                        The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
-                    Style="{StaticResource TutotialTextStyle}">
+                    Text="Hello there, adventurer into the depths of the Internet! The Web is a a dark and scary place for a lonely Http Server(no matter how happy he is). But don't worry, you will get some help from friends too!"
+                        Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
                 </Grid>
             </PivotItem>

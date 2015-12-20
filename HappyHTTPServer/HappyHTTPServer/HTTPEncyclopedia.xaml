@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FEFEA7" >
         <Button x:Name="RunButton" Content="Ask Wikipedia for all status codes" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="46" Click="RunButtonClick"/>
         <ScrollViewer Margin="10,61,10,10">
             <TextBlock x:Name="ResultTextBlock" TextWrapping="Wrap" Text="" />
