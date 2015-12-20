@@ -34,5 +34,10 @@
         {
             Frame.Navigate(typeof(Tutorial));
         }
+
+        private async void OnButtonClickHttpEncyclopedia(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HTTPEncyclopedia));
+        }
     }
 }

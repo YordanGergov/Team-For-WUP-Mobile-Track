@@ -36,6 +36,10 @@
             <Button x:Name="dummyButton2"
                 Click="OnButtonClickTutorial"
                 Content="Tutorial"/>
+
+            <Button x:Name="dummyButton3"
+                Click="OnButtonClickHttpEncyclopedia"
+                Content="Encyclopedia"/>
         </ListBox>
 
 
