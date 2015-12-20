@@ -133,11 +133,13 @@
     <None Include="HappyHTTPServer_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Images\HappyHTTPServerMainPage.png" />
+    <Content Include="Images\SecurityUpdate.jpg" />
     <Content Include="Images\server.png" />
+    <Content Include="Images\HttpSuccess.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
