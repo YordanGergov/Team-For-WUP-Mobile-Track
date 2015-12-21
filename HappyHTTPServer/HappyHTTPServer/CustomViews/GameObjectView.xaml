@@ -12,6 +12,7 @@
 
     <Grid>
         <Ellipse Height="{Binding ElementName=GameObject, Path=Diameter}"
-                 Width="{Binding ElementName=GameObject, Path=Diameter}"></Ellipse>
+                 Width="{Binding ElementName=GameObject, Path=Diameter}"
+                 Fill="Blue" Stroke="Red"></Ellipse>
     </Grid>
 </UserControl>

@@ -26,12 +26,13 @@
     public sealed partial class PlayPage : Page
     {
         private Accelerometer accelerometer;
-        private TokenServerViewModel happyServerVM;
+        private double GameOverCount = 2;
 
         public PlayPage()
         {
             this.InitializeComponent();
-            this.mediaPlayer.Play();
+            this.DataContext = new FieldViewModel();
+            //this.mediaPlayer.Play();
             GenerateContacts();
 
             //this.DataContext = new FieldViewModel(200, 200);
@@ -50,24 +51,68 @@
             //};
             //timer.Start();
 
-            //// friendly
-            //var timer2 = new DispatcherTimer();
-            //timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
-            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            // friendly
+           
 
-            //timer2.Tick += (snd, arg) =>
-            //{
-            //    viewModel.AddFriendlyObjects(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            //};
-            //timer2.Start();
 
-            this.happyServerVM = new TokenServerViewModel();
-            this.DataContext = this.happyServerVM;
             this.accelerometer = Accelerometer.GetDefault();
             this.accelerometer.ReportInterval = 50;
             this.accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
+
+            var objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
+            var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            var timer2 = new DispatcherTimer();
+            timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
+            objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
+            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+
+            timer2.Tick += (snd, arg) =>
+            {
+                var x = Generator.GetRandomNumber(0, 200);
+                this.ViewModel.AddFriendlyObjects(x, x, "imgstring");
+            };
+            timer2.Start();
+
+            var physicsTimer = new DispatcherTimer();
+            physicsTimer.Interval = TimeSpan.FromMilliseconds(100);
+            physicsTimer.Tick += (snd, arg) =>
+            {
+                var collideObjs = new List<GameObjectViewModel>();
+
+                foreach (var item in this.ViewModel.FriendlyObjects)
+                {
+                    var something = this.ViewModel.Player.IsOver(item);
+                    if (something)
+                    {
+                        collideObjs.Add(item);
+                    }
+                }
+
+                var count = collideObjs.Count;
+
+                this.ViewModel.Score += 10 * count / this.ViewModel.Player.Scale;
+                collideObjs.ForEach(this.ViewModel.Remove);
+
+                this.GameOverCount--;
+
+                if(this.GameOverCount <= 0)
+                {
+                    physicsTimer.Stop();
+                    this.Frame.Navigate(typeof(FinalPage), this.ViewModel.Score);
+                }
+            };
+            physicsTimer.Start();
+
         }
+
+        public FieldViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as FieldViewModel;
+            }
+        }
+
 
         async private void ReadingChanged(object Accelerometer, AccelerometerReadingChangedEventArgs e)
         {
@@ -75,52 +120,47 @@
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AccelerometerReading reading = e.Reading;
-                var top = Canvas.GetTop(HappyServer);
-                var left = Canvas.GetLeft(HappyServer);
+                var top = this.ViewModel.Player.Top;
+                var left = this.ViewModel.Player.Left;
+
                 var x = reading.AccelerationX;
                 var y = reading.AccelerationY;
                 var z = reading.AccelerationZ;
+
                 var pitchAngle = Math.Atan2(-x, Math.Sqrt(y * y + z * z)) * (180 / Math.PI); // formula calculating the angle on x
                 var rollAngle = Math.Atan2(y, z) * (180 / Math.PI); // formula calculating the angle on y
-                double newTop = top;
-                double newLeft = left;
+
                 var speedY = 0.02;
                 var speedX = 0.05;
 
                 if (rollAngle < -100)
                 {
-                    newTop += speedY * (rollAngle - 90);
+                    this.ViewModel.Player.Top += speedY * (rollAngle - 90);
                 }
                 else if (rollAngle > -80)
                 {
-                    newTop -= speedY * (rollAngle - 90);
+                    this.ViewModel.Player.Top -= speedY * (rollAngle - 90);
                 }
 
                 if (pitchAngle > 20)
                 {
-                    newLeft += speedX * (pitchAngle - 90);
+                    this.ViewModel.Player.Left += speedX * (pitchAngle - 90);
                 }
                 else if (pitchAngle < -20)
                 {
-                    newLeft -= speedX * (pitchAngle - 90);
+                    this.ViewModel.Player.Left -= speedX * (pitchAngle - 90);
                 }
-
-                this.happyServerVM.TopSize = newTop + this.HappyServer.Height;
-                this.happyServerVM.LeftSize = newLeft + this.HappyServer.Width;
 
                 //// the following is to stop our object not to go outside of the canvas
-                if (this.happyServerVM.TopSize > this.HappyServer.Height /*&& this.happyServerVM.TopSize < this.Field.ActualHeight*/)
-                {
-                    Canvas.SetTop(HappyServer, newTop);
-                }
+                //if (this.happyServerVM.TopSize > this.HappyServer.Height /*&& this.happyServerVM.TopSize < this.Field.ActualHeight*/)
+                //{
+                //    Canvas.SetTop(HappyServer, newTop);
+                //}
 
-                if (this.happyServerVM.LeftSize > this.HappyServer.Width /*&& this.happyServerVM.LeftSize < this.Field.ActualWidth*/)
-                {
-                    Canvas.SetLeft(HappyServer, newLeft);
-                }
-
-                this.DataContext = this.happyServerVM;
-
+                //if (this.happyServerVM.LeftSize > this.HappyServer.Width /*&& this.happyServerVM.LeftSize < this.Field.ActualWidth*/)
+                //{
+                //    Canvas.SetLeft(HappyServer, newLeft);
+                //}
             });
         }
 
@@ -166,7 +206,7 @@
 
         private void HappyServer_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-                this.musicClick.Play();          
+            //this.musicClick.Play();
         }
 
         private async void OnButtonClickEnd(object sender, RoutedEventArgs e)
@@ -174,38 +214,17 @@
             Frame.Navigate(typeof(FinalPage));
         }
 
-        //private void HappyServer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        //{
+        private void Canvas_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
 
-        //    //validation and casting
-        //    var element = sender as UIElement;
+            this.ViewModel.Player.Scale *= e.Delta.Scale;
+            this.ViewModel.Player.Size *= this.ViewModel.Player.Scale;
 
-        //    if (element == null)
-        //    {
-        //        return;
-        //    }
+        }
 
-        //    // create transfrom
-        //    element.RenderTransform = new ScaleTransform();
-        //    element.RenderTransformOrigin = new Point(0.5, 0.5);
-        //    var transform = element.RenderTransform as ScaleTransform;
+        private void Canvas_Tapped(object sender, TappedRoutedEventArgs e)
+        {
 
-        //    var sizeChange = e.Delta.Scale;
-
-        //    transform.ScaleX += sizeChange;
-        //    transform.ScaleY += sizeChange;
-
-        //    var delta = e.Delta;
-
-        //    var x = delta.Translation.X;
-        //    var y = delta.Translation.Y;
-
-        //    var viewModeld = this.DataContext as GameObjectViewModel;
-        //    if (viewModeld.Left + x < 0)
-        //    { return; }
-        //    viewModeld.Top += y;
-        //    viewModeld.Left += x;
-
-        //}
+        }
     }
 }

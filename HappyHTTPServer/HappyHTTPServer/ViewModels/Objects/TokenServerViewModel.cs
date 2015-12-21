@@ -1,71 +1,39 @@
 ﻿namespace HappyHTTPServer.ViewModels
 {
+    using Objects;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
-    public class TokenServerViewModel: BaseViewModel
+    public class TokenServerViewModel: GameObjectViewModel
     {
-        private double scaleWidth;
+        private double size;
+        private double scale;
 
-        private double scaleHeight;
+        public TokenServerViewModel( double left, double top, double size)
+            :base(left,top,size)
+        {
+            this.Scale = 1;
+        }
 
-        private double topSize;
-
-        private double leftSize;
-
-        public double ScaleWidth
+        public double Scale
         {
             get
             {
-                return this.scaleWidth;
+                return this.scale;
             }
             set
             {
-                this.scaleWidth = value;
-                this.OnPropertyChanged("ScaleWidth");
+                this.scale = value;
+                this.OnPropertyChanged("Scale");
             }
         }
 
-        public double ScaleHeight
+        public override bool IsOver(GameObjectViewModel other)
         {
-            get
-            {
-                return this.scaleHeight;
-            }
-            set
-            {
-                this.scaleHeight = value;
-                this.OnPropertyChanged("ScaleHeight");
-            }
-        }
-
-        public double TopSize
-        {
-            get
-            {
-                return this.topSize;
-            }
-            set
-            {
-                this.topSize = value;
-                this.OnPropertyChanged("TopSize");
-            }
-        }
-
-        public double LeftSize
-        {
-            get
-            {
-                return this.leftSize;
-            }
-            set
-            {
-                this.leftSize = value;
-                this.OnPropertyChanged("LeftSize");
-            }
+            return base.IsOver(other);
         }
     }
 }

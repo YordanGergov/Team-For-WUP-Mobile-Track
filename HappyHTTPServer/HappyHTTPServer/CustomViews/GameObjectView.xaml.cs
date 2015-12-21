@@ -24,15 +24,19 @@ namespace HappyHTTPServer.CustomViews
             this.InitializeComponent();
         }
 
+
+
         public double Diameter
         {
-            get { return (double)GetValue(DiaProperty); }
-            set { SetValue(DiaProperty, value); }
+            get { return (double)GetValue(DiameterProperty); }
+            set { SetValue(DiameterProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Dia.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DiaProperty =
-            DependencyProperty.Register("Dia", typeof(double), typeof(GameObjectView), new PropertyMetadata(25.0));
+        // Using a DependencyProperty as the backing store for Diameter.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DiameterProperty =
+            DependencyProperty.Register("Diameter", typeof(double), typeof(GameObjectView), new PropertyMetadata(25.0));
+
+
 
 
         public bool Friendly

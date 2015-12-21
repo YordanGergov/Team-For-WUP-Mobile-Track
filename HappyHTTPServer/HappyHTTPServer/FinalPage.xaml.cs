@@ -27,24 +27,31 @@ namespace HappyHTTPServer
         public FinalPage()
         {
             this.InitializeComponent();
-            LoadContacts();
+            //LoadContacts();
         }
 
-        private async void LoadContacts()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var contactsStore = await ContactManager.RequestStoreAsync(Windows.ApplicationModel.Contacts.ContactStoreAccessType.AllContactsReadOnly);
-            var allContacts = await contactsStore.FindContactsAsync();
-            var contactAsList1 = allContacts.ToList();
-            
+            base.OnNavigatedTo(e);
 
-            foreach (var item in contactAsList1)
-            {
-                var contactToAdd = new Helpers.Contact(item.Name, item.Phones.FirstOrDefault().Number, item.Emails.FirstOrDefault().Address);
-                contactAsList.Add(contactToAdd);
-            }
-
-            var what = contactAsList.FirstOrDefault();
-            this.FriendsWhoHelped.DataContext = contactAsList;
+            this.Score.Text = e.Parameter.ToString();
         }
+
+        //private async void LoadContacts()
+        //{
+        //    var contactsStore = await ContactManager.RequestStoreAsync(Windows.ApplicationModel.Contacts.ContactStoreAccessType.AllContactsReadOnly);
+        //    var allContacts = await contactsStore.FindContactsAsync();
+        //    var contactAsList1 = allContacts.ToList();
+
+
+        //    foreach (var item in contactAsList1)
+        //    {
+        //        var contactToAdd = new Helpers.Contact(item.Name, item.Phones.FirstOrDefault().Number, item.Emails.FirstOrDefault().Address);
+        //        contactAsList.Add(contactToAdd);
+        //    }
+
+        //    var what = contactAsList.FirstOrDefault();
+        //    this.FriendsWhoHelped.DataContext = contactAsList;
+        //}
     }
 }

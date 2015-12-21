@@ -6,28 +6,26 @@ namespace HappyHTTPServer.ViewModels.Objects
     using System.Linq;
     using System.Text;
     using HappyHTTPServer.Common;
-
-    public class GameObjectViewModel : BaseViewModel
+    using Windows.Foundation;
+    public abstract class GameObjectViewModel : BaseViewModel
     {
         private double top;
         private double left;
+        private double size;
 
-        private double width;
-        private bool friendly;
+        //private double width;
+        //private bool friendly;
 
-        public GameObjectViewModel(double top, double left, string imageSource, bool friendly)
-            : this(top, left, Constants.DefaultGameObjectRadius, imageSource, friendly)
-        {
-        }
+        //public GameObjectViewModel(double top, double left, string imageSource, bool friendly)
+        //    : this(top, left, Constants.DefaultGameObjectRadius, imageSource, friendly)
+        //{
+        //}
 
-        public GameObjectViewModel(double top, double left, double width, string imageSource, bool friendly)
+        public GameObjectViewModel(double left, double top, double size)
         {
             this.Top = top;
             this.Left = left;
-            this.ImageSource = imageSource;
-            this.Width = width;
-            this.IsAlive = true;
-            this.Friendly = friendly;
+            this.Size = size;
         }
 
         public double Top
@@ -56,56 +54,26 @@ namespace HappyHTTPServer.ViewModels.Objects
             }
         }
 
-        public string ImageSource { get; set; }
-
-        public double Width
+        public double Size
         {
             get
             {
-                return this.width;
+                return this.size;
             }
             set
             {
-                this.width = value;
-                this.OnPropertyChanged("Width");
-            }
-        }
-
-        public double Height
-        {
-            get
-            {
-                return this.width;
-            }
-            set
-            {
-                this.width = value;
-                this.OnPropertyChanged("Height");
-            }
-        }
-
-        public bool IsAlive { get; set; }
-
-        public bool Friendly
-        {
-            get
-            {
-                return this.friendly;
-            }
-            set
-            {
-                this.friendly = value;
-                this.OnPropertyChanged("Friendly");
+                this.size = value;
+                this.OnPropertyChanged("Size");
             }
         }
 
         public virtual bool IsOver(GameObjectViewModel other)
         {
             var min = this.Left;
-            var max = this.Left + this.Width;
+            var max = this.Left + this.Size;
 
             var left1 = other.Left;
-            var left2 = other.Left + other.Width;
+            var left2 = other.Left + other.Size;
 
             bool isOverHorizontally = (min <= left1 && left1 <= max) ||
                 (min <= left2 && left2 <= max);
@@ -116,9 +84,9 @@ namespace HappyHTTPServer.ViewModels.Objects
             }
 
             min = this.Top;
-            max = this.Top + this.Width;
+            max = this.Top + this.Size;
             var top1 = other.Top;
-            var top2 = other.Top + other.Width;
+            var top2 = other.Top + other.Size;
             bool isOverVertically = (min <= top1 && top1 <= max) ||
                 (min <= top2 && top2 <= max);
 

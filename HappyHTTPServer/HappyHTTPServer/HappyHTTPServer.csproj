@@ -130,6 +130,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\FieldViewModel.cs" />
     <Compile Include="ViewModels\Objects\GameObjectViewModel.cs" />
+    <Compile Include="ViewModels\Objects\RequestViewModel.cs" />
     <Compile Include="ViewModels\Objects\TokenServerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

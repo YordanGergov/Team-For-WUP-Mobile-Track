@@ -26,14 +26,31 @@
 
         private ObservableCollection<GameObjectViewModel> enemies;
         private ObservableCollection<GameObjectViewModel> friendlyObjects;
+        private TokenServerViewModel player;
+        private double score;
 
-        public FieldViewModel(double height, double width)
+        public FieldViewModel()
         {
-            this.Height = height;
-            this.Width = width;
-            this.CountObjectsInHeight = (int)this.Height / 25 - 1;
-            this.CountObjectsInWidth = (int)this.Width / 25 - 1;
-            this.fieldCoordinates = GenerateCoordinatesField(this.Width, this.Height);
+            //this.Height = height;
+            //this.Width = width;
+            //this.CountObjectsInHeight = (int)this.Height / 25 - 1;
+            //this.CountObjectsInWidth = (int)this.Width / 25 - 1;
+            //this.fieldCoordinates = GenerateCoordinatesField(this.Width, this.Height);
+            this.Player = new TokenServerViewModel(100,100,25);
+        }
+
+        public TokenServerViewModel Player
+        {
+            get
+            {
+                return this.player;
+            }
+
+            set
+            {
+                this.player = value;
+                this.OnPropertyChanged("Player");
+            }
         }
 
         public IEnumerable<GameObjectViewModel> Enemies
@@ -54,7 +71,6 @@
                 }
                 this.enemies.Clear();
                 this.enemies.ForEach(this.enemies.Add);
-                this.OnPropertyChanged("FriendlyObjects");
             }
         }
 
@@ -76,7 +92,6 @@
                 }
                 this.friendlyObjects.Clear();
                 this.enemies.ForEach(this.enemies.Add);
-                this.OnPropertyChanged("FriendlyObjects");
             }
         }
 
@@ -103,6 +118,19 @@
             {
                 this.height = value;
                 this.OnPropertyChanged("Height");
+            }
+        }
+
+        public double Score
+        {
+            get
+            {
+                return this.score;
+            }
+            set
+            {
+                this.score = value;
+                this.OnPropertyChanged("Score");
             }
         }
 
@@ -187,24 +215,30 @@
             return output;
         }
 
-        public void AddEnemy(double top, double left, string img)
-        {
-            var enemy = new GameObjectViewModel(top, left, img, false);
-            if (this.enemies == null)
-            {
-                this.enemies = new ObservableCollection<GameObjectViewModel>();
-            }
-            this.enemies.Add(enemy);
-        }
+        //public void AddEnemy(double top, double left, string img)
+        //{
+        //    var enemy = new GameObjectViewModel(top, left, img, false);
+        //    if (this.enemies == null)
+        //    {
+        //        this.enemies = new ObservableCollection<GameObjectViewModel>();
+        //    }
+        //    this.enemies.Add(enemy);
+        //}
 
         public void AddFriendlyObjects(double top, double left, string img)
         {
-            var friendlyObject = new GameObjectViewModel(top, left, img, true);
+            var friendlyObject = new RequestViewModel(top, left, 25);
             if (this.friendlyObjects == null)
             {
                 this.friendlyObjects = new ObservableCollection<GameObjectViewModel>();
             }
             this.friendlyObjects.Add(friendlyObject);
-        }       
+        }
+
+        public void Remove(GameObjectViewModel obj)
+        {
+
+            this.friendlyObjects.Remove(obj);
+        }
     }
 }

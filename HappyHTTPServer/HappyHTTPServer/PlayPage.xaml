@@ -31,12 +31,11 @@
         </MediaElement>
         
 
-            <userControls:GameObjectView Diameter="25"></userControls:GameObjectView>
-        <userControls:CanvasListView
-            ItemsSource="{Binding FriendlyObjects}"
-            x:Name="cnv1"
-            Grid.Row="1"
-            >
+        <userControls:GameObjectView Diameter="25"></userControls:GameObjectView>
+            <userControls:CanvasListView
+                ItemsSource="{Binding FriendlyObjects}"
+                x:Name="cnv1"
+                Grid.Row="1">
             <userControls:CanvasListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -47,25 +46,31 @@
                     <userControls:GameObjectView
                           Canvas.Top="{Binding Top}" 
                           Canvas.Left="{Binding Left}"
-                          Friendly="{Binding Friendly}"
+                          Diameter="{Binding Size}"
                           />
                 </DataTemplate>
             </userControls:CanvasListView.ItemTemplate>
         </userControls:CanvasListView>
 
-        <Canvas>
-            <Ellipse Name="HappyServer" HorizontalAlignment="Center" VerticalAlignment="Center"
-		   Height="25" Width="25" Stroke="Azure" Canvas.Left="50" Canvas.Top="50"
-            RenderTransformOrigin="0.5, 0.5" Fill="{StaticResource HappyServer}"
-                     DoubleTapped="HappyServer_DoubleTapped"
-                     ManipulationDelta="HappyServer_ManipulationDelta"
-                     ManipulationMode="All">
-                <!--<Ellipse.RenderTransform>
-                    <ScaleTransform ScaleX="{Binding Path=Width}" ScaleY="{Binding Path=Width}"/>
-                </Ellipse.RenderTransform>-->
-            </Ellipse>
-            <MediaElement Name="musicClick" Source="http://www.pachd.com/a/button/button1.wav" Volume="70">
-            </MediaElement>
+        <Canvas Name="stupid"
+                Grid.Row="1"
+                Tapped="Canvas_Tapped"
+                ManipulationDelta="Canvas_ManipulationDelta"
+                ManipulationMode="All"
+                Background="Transparent">
+            <Ellipse Name="HappyServer"
+		             Height="{Binding Player.Size}" Width="{Binding Player.Size}" 
+                     Canvas.Left="{Binding Player.Left}" Canvas.Top="{Binding Player.Top}"
+                     HorizontalAlignment="Center"
+                     RenderTransformOrigin="0.5, 0.5" Fill="{StaticResource HappyServer}"
+                     DoubleTapped="HappyServer_DoubleTapped">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform ScaleX="{Binding Player.Scale}" ScaleY="{Binding Player.Scale}"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>            
         </Canvas>
+        
+        <MediaElement Name="musicClick" Source="http://www.pachd.com/a/button/button1.wav" Volume="70">
+        </MediaElement>
     </Grid>
 </Page>
