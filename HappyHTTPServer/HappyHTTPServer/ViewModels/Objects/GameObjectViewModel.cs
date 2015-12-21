@@ -5,9 +5,9 @@ namespace HappyHTTPServer.ViewModels.Objects
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Constants;
+    using HappyHTTPServer.Common;
 
-    public abstract class GameObjectViewModel : BaseViewModel
+    public class GameObjectViewModel : BaseViewModel
     {
         private double top;
         private double left;
@@ -15,7 +15,7 @@ namespace HappyHTTPServer.ViewModels.Objects
         private double width;
 
         public GameObjectViewModel(double top, double left, string imageSource)
-            : this(top, left, Constants.DefaultGameObjectWidth, imageSource)
+            : this(top, left, Constants.DefaultGameObjectRadius, imageSource)
         {
         }
 

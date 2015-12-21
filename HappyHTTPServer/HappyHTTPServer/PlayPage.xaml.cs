@@ -18,6 +18,8 @@
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Navigation;
     using Windows.UI.Xaml.Shapes;
+    using HappyHTTPServer.Common;
+
     public sealed partial class PlayPage : Page
     {
         private Accelerometer accelerometer;
@@ -26,20 +28,43 @@
         public PlayPage()
         {
             this.InitializeComponent();
-            //GenerateFieldObjects();
+            this.mediaPlayer.Play();
 
-            //var timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(5000); //искам да му казвам за всяко през колко време
-            //var viewModel = this.DataContext as FieldViewModel;
-            //var rng = new Random();
-            //double x, y;
-            //double r = 30;
-            //трябват ми няколко от тези и то с определени координати и то да се редуват, че да не стане много на веднъж
-            //timer.Tick += (snd, arg) =>
-            //{
-            //    x = 100 + rng.NextDouble() * 200;
-            //    viewModel.AddShot(x, x, r);
-            //};
+            // BadRequests
+
+            var viewModel = this.DataContext as FieldViewModel;
+
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
+            var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+
+            timer.Tick += (snd, arg) =>
+            {
+                viewModel.AddBadRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            };
+
+            // securityUpgrade
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
+            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+
+            timer.Tick += (snd, arg) =>
+            {
+                viewModel.AddSecurityUpgrade(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            };
+
+            // friendHttpRequests
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.HttpFriendRequestsFrequency);
+            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+
+            timer.Tick += (snd, arg) =>
+            {
+                viewModel.AddFriendHttpRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            };
 
             //трябва ми метода за колизия да гу мушна, но първо обектите
             //сори за БГ-то - много ме мързи - утре тези коментари ще ги няма
@@ -50,6 +75,8 @@
             this.accelerometer.ReportInterval = 50;
             this.accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
         }
+
+        
 
         async private void ReadingChanged(object Accelerometer, AccelerometerReadingChangedEventArgs e)
         {
@@ -105,50 +132,5 @@
 
             });
         }
-
-        //private void GenerateFieldObjects()
-        //{
-        //    Ellipse ellipse = new Ellipse();
-        //    ellipse.Width = 25;
-        //    ellipse.Height = 25;
-        //    var countTop = 10;
-        //    var countLeft = 10;
-
-        //    //// upper ellipses
-        //    for (int i = 0; i < field.CountObjectsInWidth; i++)
-        //    {
-        //        this.Field.Children.Add(ellipse);
-        //        Canvas.SetTop(ellipse, 0);
-        //        Canvas.SetLeft(ellipse, countLeft + i * 25);
-        //        fieldEllipses.Add(ellipse);
-        //    }
-
-        //    //// left ellipses
-        //    for (int i = 0; i < field.CountObjectsInWidth; i++)
-        //    {
-        //        this.Field.Children.Add(ellipse);
-        //        Canvas.SetTop(ellipse, countTop + i * 25);
-        //        Canvas.SetLeft(ellipse, 0);
-        //        fieldEllipses.Add(ellipse);
-        //    }
-
-        //    //// bottom ellipses
-        //    for (int i = 0; i < field.CountObjectsInWidth; i++)
-        //    {
-        //        this.Field.Children.Add(ellipse);
-        //        Canvas.SetTop(ellipse, field.Height - 25);
-        //        Canvas.SetLeft(ellipse, countLeft + i * 25);
-        //        fieldEllipses.Add(ellipse);
-        //    }
-
-        //    //// right ellipses
-        //    for (int i = 0; i < field.CountObjectsInWidth; i++)
-        //    {
-        //        this.Field.Children.Add(ellipse);
-        //        Canvas.SetTop(ellipse, countTop + i * 25);
-        //        Canvas.SetLeft(ellipse, field.Width - 25);
-        //        fieldEllipses.Add(ellipse);
-        //    }
-        //}
     }
 }
