@@ -35,28 +35,28 @@
 
             // BadRequests
 
-            //var viewModel = this.DataContext as FieldViewModel;
+            this.DataContext = new FieldViewModel();
 
-            //var timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
-            //var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            //var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
+            var objectsCount = 10; /*this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;*/
+            var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            //timer.Tick += (snd, arg) =>
-            //{
-            //    viewModel.AddBadRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            //};
+            timer.Tick += (snd, arg) =>
+            {
+                this.ViewModel.AddEnemy(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            };
 
-            //// securityUpgrade
-            //timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
-            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            // securityUpgrade
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
+            objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
+            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            //timer.Tick += (snd, arg) =>
-            //{
-            //    viewModel.AddSecurityUpgrade(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            //};
+            timer.Tick += (snd, arg) =>
+            {
+                this.ViewModel.AddFriendlyObjectse(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            };
 
             //// friendHttpRequests
             //timer = new DispatcherTimer();
@@ -79,7 +79,13 @@
             this.accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
         }
 
-        
+        public FieldViewModel ViewModel
+        {
+            get
+            {
+               return this.DataContext as FieldViewModel;
+            }
+        }
 
         async private void ReadingChanged(object Accelerometer, AccelerometerReadingChangedEventArgs e)
         {
@@ -121,12 +127,12 @@
                 this.happyServerVM.LeftSize = newLeft + this.HappyServer.Width;
 
                 //// the following is to stop our object not to go outside of the canvas
-                if (this.happyServerVM.TopSize > this.HappyServer.Height && this.happyServerVM.TopSize < this.Field.ActualHeight)
+                if (this.happyServerVM.TopSize > this.HappyServer.Height /*&& this.happyServerVM.TopSize < this.Field.ActualHeight*/)
                 {
                     Canvas.SetTop(HappyServer, newTop);
                 }
 
-                if (this.happyServerVM.LeftSize > this.HappyServer.Width && this.happyServerVM.LeftSize < this.Field.ActualWidth)
+                if (this.happyServerVM.LeftSize > this.HappyServer.Width /*&& this.happyServerVM.LeftSize < this.Field.ActualWidth*/)
                 {
                     Canvas.SetLeft(HappyServer, newLeft);
                 }
@@ -152,7 +158,7 @@
                     var contact = new StoredContact(contactStore);
                     var contactDetails = await contact.GetPropertiesAsync();
 
-                    var newContact = new Helpers.Contact(string.Format("whatever{0}", i), string.Format("whatever{0}", i), string.Format("whatever{0}@whatever.com", i));
+                    var newContact = new Helpers.Contact(Generator.GenerateRandomName(3, 10), Generator.GetRandomNumber(8, 8).ToString(), string.Format("iamhappy{0}@happy.com", i));
 
                     if (!string.IsNullOrEmpty(newContact.Name))
                     {

@@ -13,19 +13,21 @@ namespace HappyHTTPServer.ViewModels.Objects
         private double left;
 
         private double width;
+        private bool friendly;
 
-        public GameObjectViewModel(double top, double left, string imageSource)
-            : this(top, left, Constants.DefaultGameObjectRadius, imageSource)
+        public GameObjectViewModel(double top, double left, string imageSource, bool friendly)
+            : this(top, left, Constants.DefaultGameObjectRadius, imageSource, friendly)
         {
         }
 
-        public GameObjectViewModel(double top, double left, double width, string imageSource)
+        public GameObjectViewModel(double top, double left, double width, string imageSource, bool friendly)
         {
             this.Top = top;
             this.Left = left;
             this.ImageSource = imageSource;
             this.Width = width;
             this.IsAlive = true;
+            this.Friendly = friendly;
         }
 
         public double Top
@@ -83,6 +85,19 @@ namespace HappyHTTPServer.ViewModels.Objects
         }
 
         public bool IsAlive { get; set; }
+
+        public bool Friendly
+        {
+            get
+            {
+                return this.friendly;
+            }
+            set
+            {
+                this.friendly = value;
+                this.OnPropertyChanged("Friendly");
+            }
+        }
 
         public virtual bool IsOver(GameObjectViewModel other)
         {

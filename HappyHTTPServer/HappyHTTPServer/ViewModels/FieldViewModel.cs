@@ -24,9 +24,9 @@
 
         private double[][] fieldCoordinates;
 
-        private ObservableCollection<GameObjectViewModel> badRequests;
-        private ObservableCollection<GameObjectViewModel> securityUpgrades;
-        private ObservableCollection<GameObjectViewModel> friendHttpRequests;
+        private ObservableCollection<GameObjectViewModel> enemies;
+        private ObservableCollection<GameObjectViewModel> friendlyObjects;
+        private bool friendly;
 
         public FieldViewModel()
         {
@@ -34,54 +34,37 @@
             this.CountObjectsInWidth = (int)this.Width / 25 - 1;
         }
 
-        public IEnumerable<GameObjectViewModel> BadRequests
+        public IEnumerable<GameObjectViewModel> Enemies
         {
             get
             {
-                return this.badRequests;
+                return this.enemies;
             }
             set
             {
-                if (this.badRequests == null)
+                if (this.enemies == null)
                 {
-                    this.badRequests = new ObservableCollection<GameObjectViewModel>();
+                    this.enemies = new ObservableCollection<GameObjectViewModel>();
                 }
-                this.badRequests.Clear();
-                this.badRequests.AddRange(value);
+                this.enemies.Clear();
+                this.enemies.AddRange(value);
             }
         }
 
-        public IEnumerable<GameObjectViewModel> SecurityUpgrades
+        public IEnumerable<GameObjectViewModel> FriendlyObjects
         {
             get
             {
-                return this.securityUpgrades;
+                return this.friendlyObjects;
             }
             set
             {
-                if (this.securityUpgrades == null)
+                if (this.friendlyObjects == null)
                 {
-                    this.securityUpgrades = new ObservableCollection<GameObjectViewModel>();
+                    this.friendlyObjects = new ObservableCollection<GameObjectViewModel>();
                 }
-                this.securityUpgrades.Clear();
-                this.securityUpgrades.AddRange(value);
-            }
-        }
-
-        public ObservableCollection<GameObjectViewModel> FriendHttpRequests
-        {
-            get
-            {
-                return this.friendHttpRequests;
-            }
-            set
-            {
-                if (this.friendHttpRequests == null)
-                {
-                    this.friendHttpRequests = new ObservableCollection<GameObjectViewModel>();
-                }
-                this.friendHttpRequests.Clear();
-                this.friendHttpRequests.AddRange(value);
+                this.friendlyObjects.Clear();
+                this.friendlyObjects.AddRange(value);
             }
         }
 
@@ -189,24 +172,16 @@
             return output;
         }
 
-        public void AddBadRequest(double top, double left, string img)
+        public void AddEnemy(double top, double left, string img)
         {
-            var badRequest = new GameObjectViewModel(top, left, img);
-            this.badRequests.Add(badRequest);
+            var enemy = new GameObjectViewModel(top, left, img, false);
+            this.enemies.Add(enemy);
         }
 
-        public void AddSecurityUpgrade(double top, double left, string img)
+        public void AddFriendlyObjectse(double top, double left, string img)
         {
-            var securityUpgrade = new GameObjectViewModel(top, left, img);
-            this.securityUpgrades.Add(securityUpgrade);
-        }
-
-        public void AddFriendHttpRequest(double top, double left, string img)
-        {
-            var friendHttpRequest = new GameObjectViewModel(top, left, img);
-            this.friendHttpRequests.Add(friendHttpRequest);
-        }
-
-        
+            var friendlyObject = new GameObjectViewModel(top, left, img, true);
+            this.friendlyObjects.Add(friendlyObject);
+        }       
     }
 }

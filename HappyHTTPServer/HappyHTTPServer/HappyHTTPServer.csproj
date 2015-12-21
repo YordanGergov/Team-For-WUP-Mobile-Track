@@ -101,6 +101,9 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Generator.cs" />
     <Compile Include="Common\RandomProvider.cs" />
+    <Compile Include="CustomViews\GameObjectView.xaml.cs">
+      <DependentUpon>GameObjectView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Contact.cs" />
     <Compile Include="HTTPEncyclopedia.xaml.cs">
       <DependentUpon>HTTPEncyclopedia.xaml</DependentUpon>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CustomViews\GameObjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HTTPEncyclopedia.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
