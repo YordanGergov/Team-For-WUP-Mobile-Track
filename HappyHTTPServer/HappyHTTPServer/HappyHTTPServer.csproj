@@ -101,6 +101,7 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Generator.cs" />
     <Compile Include="Common\RandomProvider.cs" />
+    <Compile Include="Helpers\Contact.cs" />
     <Compile Include="HTTPEncyclopedia.xaml.cs">
       <DependentUpon>HTTPEncyclopedia.xaml</DependentUpon>
     </Compile>
@@ -175,6 +176,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

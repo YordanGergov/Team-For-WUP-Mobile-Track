@@ -1,11 +1,13 @@
 ﻿namespace HappyHTTPServer.ViewModels
 {
-    using Extensions;
-    using Objects;
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices.WindowsRuntime;
+    using Extensions;
+    using Objects;
+    using System.Collections.ObjectModel;
     using System.Text;
     using System.Threading.Tasks;
     using HappyHTTPServer.Common;
@@ -204,5 +206,7 @@
             var friendHttpRequest = new GameObjectViewModel(top, left, img);
             this.friendHttpRequests.Add(friendHttpRequest);
         }
+
+        
     }
 }

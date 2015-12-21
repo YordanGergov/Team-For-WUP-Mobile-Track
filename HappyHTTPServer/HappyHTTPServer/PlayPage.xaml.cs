@@ -19,6 +19,9 @@
     using Windows.UI.Xaml.Navigation;
     using Windows.UI.Xaml.Shapes;
     using HappyHTTPServer.Common;
+    using Helpers;
+    using Windows.ApplicationModel.Contacts;
+    using Windows.Phone.PersonalInformation;
 
     public sealed partial class PlayPage : Page
     {
@@ -32,42 +35,42 @@
 
             // BadRequests
 
-            var viewModel = this.DataContext as FieldViewModel;
+            //var viewModel = this.DataContext as FieldViewModel;
 
-            var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
-            var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            //var timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
+            //var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            //var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer.Tick += (snd, arg) =>
-            {
-                viewModel.AddBadRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            };
+            //timer.Tick += (snd, arg) =>
+            //{
+            //    viewModel.AddBadRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            //};
 
-            // securityUpgrade
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
-            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            //// securityUpgrade
+            //timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
+            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer.Tick += (snd, arg) =>
-            {
-                viewModel.AddSecurityUpgrade(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            };
+            //timer.Tick += (snd, arg) =>
+            //{
+            //    viewModel.AddSecurityUpgrade(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            //};
 
-            // friendHttpRequests
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.HttpFriendRequestsFrequency);
-            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            //// friendHttpRequests
+            //timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.HttpFriendRequestsFrequency);
+            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer.Tick += (snd, arg) =>
-            {
-                viewModel.AddFriendHttpRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            };
+            //timer.Tick += (snd, arg) =>
+            //{
+            //    viewModel.AddFriendHttpRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            //};
 
-            //трябва ми метода за колизия да гу мушна, но първо обектите
-            //сори за БГ-то - много ме мързи - утре тези коментари ще ги няма
+            ////трябва ми метода за колизия да гу мушна, но първо обектите
+            ////сори за БГ-то - много ме мързи - утре тези коментари ще ги няма
 
             this.happyServerVM = new TokenServerViewModel();
             this.DataContext = this.happyServerVM;
@@ -131,6 +134,46 @@
                 this.DataContext = this.happyServerVM;
 
             });
+        }
+
+        public async void GenerateContacts()
+        {
+            var contactsStore = await ContactManager.RequestStoreAsync(Windows.ApplicationModel.Contacts.ContactStoreAccessType.AllContactsReadOnly);
+            var allContacts = await contactsStore.FindContactsAsync();
+            var contactAsList = allContacts.ToList();
+
+            if (contactAsList.Count == 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    var contactStore = await Windows.Phone.PersonalInformation.ContactStore.CreateOrOpenAsync(
+                                                                                            ContactStoreSystemAccessMode.ReadWrite,
+                                                                                            ContactStoreApplicationAccessMode.ReadOnly);
+                    var contact = new StoredContact(contactStore);
+                    var contactDetails = await contact.GetPropertiesAsync();
+
+                    var newContact = new Helpers.Contact(string.Format("whatever{0}", i), string.Format("whatever{0}", i), string.Format("whatever{0}@whatever.com", i));
+
+                    if (!string.IsNullOrEmpty(newContact.Name))
+                    {
+                        contactDetails.Add(KnownContactProperties.GivenName, newContact.Name);
+                    }
+                    if (!string.IsNullOrEmpty(newContact.PhoneNumber))
+                    {
+                        contactDetails.Add(KnownContactProperties.WorkTelephone, newContact.PhoneNumber);
+                    }
+                    if (!string.IsNullOrEmpty(newContact.PhoneNumber))
+                    {
+                        contactDetails.Add(KnownContactProperties.Email, newContact.Email);
+                    }
+
+                    await contact.SaveAsync();
+                }
+
+                contactsStore = await ContactManager.RequestStoreAsync(Windows.ApplicationModel.Contacts.ContactStoreAccessType.AllContactsReadOnly);
+                allContacts = await contactsStore.FindContactsAsync();
+                contactAsList = allContacts.ToList();
+            }
         }
     }
 }

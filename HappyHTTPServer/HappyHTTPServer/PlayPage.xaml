@@ -13,7 +13,7 @@
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Play Page" Grid.Row="0" VerticalAlignment="Stretch"></TextBlock>
-        <MediaElement Name="mediaPlayer" Source="http://adventurelandtravel.com/gator.wav" Volume="50">
+        <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="70">
         </MediaElement>
         <Canvas Name="Field" Grid.Row="1" Background="Beige">
             <Ellipse Name="HappyServer" HorizontalAlignment="Center" VerticalAlignment="Center"
