@@ -25,9 +25,12 @@ namespace HappyHTTPServer
             this.InitializeComponent();
         }
 
+
         private async void RunButtonClick(object sender, RoutedEventArgs e)
         {
-             var config = Configuration.Default.WithDefaultLoader();
+            ProggressRing.IsActive = true;
+
+            var config = Configuration.Default.WithDefaultLoader();
 
             var address = "https://en.wikipedia.org/wiki/List_of_HTTP_status_codes";
 
@@ -40,6 +43,8 @@ namespace HappyHTTPServer
             var titles = cells.Select(m => m.TextContent);
 
             this.ResultTextBlock.Text = string.Join(Environment.NewLine, titles);
+
+            ProggressRing.IsActive = false;
         }
     }
 }
