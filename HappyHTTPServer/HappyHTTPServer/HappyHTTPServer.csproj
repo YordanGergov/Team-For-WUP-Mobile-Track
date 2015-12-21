@@ -104,7 +104,10 @@
     <Compile Include="CustomViews\GameObjectView.xaml.cs">
       <DependentUpon>GameObjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Contact.cs" />
+    <Compile Include="FinalPage.xaml.cs">
+      <DependentUpon>FinalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Contact.cs" />
     <Compile Include="HTTPEncyclopedia.xaml.cs">
       <DependentUpon>HTTPEncyclopedia.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="CustomViews\GameObjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FinalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

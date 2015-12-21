@@ -32,6 +32,7 @@
         {
             this.InitializeComponent();
             this.mediaPlayer.Play();
+            GenerateContacts();
 
             this.DataContext = new FieldViewModel(200, 200);
             var viewModel = this.DataContext as FieldViewModel/*(this.GridContainer.RowDefinitions[1].ActualHeight 200,200 this.GridContainer.ActualWidth)*/;
@@ -138,7 +139,7 @@
                     var contact = new StoredContact(contactStore);
                     var contactDetails = await contact.GetPropertiesAsync();
 
-                    var newContact = new Helpers.Contact(Generator.GenerateRandomName(3, 10), Generator.GetRandomNumber(8, 8).ToString(), string.Format("iamhappy{0}@happy.com", i));
+                    var newContact = new Helpers.Contact(Generator.GenerateRandomName(3, 10), Generator.GenerateRandomTelephoneNumber().ToString(), string.Format("iamhappy{0}@happy.com", i));
 
                     if (!string.IsNullOrEmpty(newContact.Name))
                     {
@@ -165,6 +166,11 @@
         private void HappyServer_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
                 this.musicClick.Play();          
+        }
+
+        private async void OnButtonClickEnd(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FinalPage));
         }
 
         private void HappyServer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)

@@ -13,7 +13,20 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Text="Play Page" Grid.Row="0" VerticalAlignment="Stretch"></TextBlock>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="End Page" VerticalAlignment="Stretch" Grid.Column="0"></TextBlock>
+            <Button x:Name="playButton"
+                    Grid.Column="1"
+                Click="OnButtonClickEnd"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="End Game"/>
+        </Grid>
+        
         <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="30">
         </MediaElement>
         
@@ -45,7 +58,8 @@
 		   Height="25" Width="25" Stroke="Azure" Canvas.Left="50" Canvas.Top="50"
             RenderTransformOrigin="0.5, 0.5" Fill="{StaticResource HappyServer}"
                      DoubleTapped="HappyServer_DoubleTapped"
-                     ManipulationDelta="HappyServer_ManipulationDelta">
+                     ManipulationDelta="HappyServer_ManipulationDelta"
+                     ManipulationMode="All">
                 <!--<Ellipse.RenderTransform>
                     <ScaleTransform ScaleX="{Binding Path=Width}" ScaleY="{Binding Path=Width}"/>
                 </Ellipse.RenderTransform>-->
