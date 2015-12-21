@@ -9,33 +9,10 @@
     mc:Ignorable="d">
 
     <Grid x:Name="GridContainer" Background="Pink">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="End Page" VerticalAlignment="Stretch" Grid.Column="0"></TextBlock>
-            <Button x:Name="playButton"
-                    Grid.Column="1"
-                Click="OnButtonClickEnd"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Content="End Game"/>
-        </Grid>
-        
-        <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="30">
-        </MediaElement>
-        
-
         <userControls:GameObjectView Diameter="25"></userControls:GameObjectView>
-            <userControls:CanvasListView
+        <userControls:CanvasListView
                 ItemsSource="{Binding FriendlyObjects}"
-                x:Name="cnv1"
-                Grid.Row="1">
+                x:Name="cnv1">
             <userControls:CanvasListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -52,12 +29,13 @@
             </userControls:CanvasListView.ItemTemplate>
         </userControls:CanvasListView>
 
-        <Canvas Name="stupid"
-                Grid.Row="1"
+        <Canvas Name="HappyHttpCanvas"
                 Tapped="Canvas_Tapped"
                 ManipulationDelta="Canvas_ManipulationDelta"
                 ManipulationMode="All"
-                Background="Transparent">
+                Background="Transparent"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
             <Ellipse Name="HappyServer"
 		             Height="{Binding Player.Size}" Width="{Binding Player.Size}" 
                      Canvas.Left="{Binding Player.Left}" Canvas.Top="{Binding Player.Top}"
@@ -71,6 +49,8 @@
         </Canvas>
         
         <MediaElement Name="musicClick" Source="http://www.pachd.com/a/button/button1.wav" Volume="70">
+        </MediaElement>
+        <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="30">
         </MediaElement>
     </Grid>
 </Page>

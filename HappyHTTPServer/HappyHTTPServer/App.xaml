@@ -7,6 +7,7 @@
 
     <Application.Resources>
         <ImageBrush x:Key="HappyServer" ImageSource="/Images/server.png"/>
+        <ImageBrush x:Key="Request" ImageSource="/Images/HttpSuccess.png"/>
 
         <Style x:Key="TutotialTextStyle"
                TargetType="TextBlock">

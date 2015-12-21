@@ -26,13 +26,13 @@
     public sealed partial class PlayPage : Page
     {
         private Accelerometer accelerometer;
-        private double GameOverCount = 2;
+        private double GameOverCount = 1800;
 
         public PlayPage()
         {
             this.InitializeComponent();
             this.DataContext = new FieldViewModel();
-            //this.mediaPlayer.Play();
+            this.mediaPlayer.Play();
             GenerateContacts();
 
             //this.DataContext = new FieldViewModel(200, 200);
@@ -61,17 +61,18 @@
 
             var objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
             var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
-            var timer2 = new DispatcherTimer();
-            timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
+            var spawnTimer = new DispatcherTimer();
+            spawnTimer.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
             objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
             randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer2.Tick += (snd, arg) =>
+            spawnTimer.Tick += (snd, arg) =>
             {
-                var x = Generator.GetRandomNumber(0, 200);
-                this.ViewModel.AddFriendlyObjects(x, x, "imgstring");
+                var x = Generator.GetRandomNumber(40, (int)this.HappyHttpCanvas.ActualWidth - 40);
+                var y = Generator.GetRandomNumber(40, (int)this.HappyHttpCanvas.ActualHeight - 40);
+                this.ViewModel.AddFriendlyObjects(x, y, "imgstring");
             };
-            timer2.Start();
+            spawnTimer.Start();
 
             var physicsTimer = new DispatcherTimer();
             physicsTimer.Interval = TimeSpan.FromMilliseconds(100);
@@ -132,35 +133,37 @@
 
                 var speedY = 0.02;
                 var speedX = 0.05;
+                var newTop = this.ViewModel.Player.Top;
+                var newLeft = this.ViewModel.Player.Left;
 
                 if (rollAngle < -100)
                 {
-                    this.ViewModel.Player.Top += speedY * (rollAngle - 90);
+                    newTop += speedY * (rollAngle - 90);
                 }
                 else if (rollAngle > -80)
                 {
-                    this.ViewModel.Player.Top -= speedY * (rollAngle - 90);
+                    newTop -= speedY * (rollAngle - 90);
                 }
 
                 if (pitchAngle > 20)
                 {
-                    this.ViewModel.Player.Left += speedX * (pitchAngle - 90);
+                    newLeft += speedX * (pitchAngle - 90);
                 }
                 else if (pitchAngle < -20)
                 {
-                    this.ViewModel.Player.Left -= speedX * (pitchAngle - 90);
+                    newLeft -= speedX * (pitchAngle - 90);
                 }
 
-                //// the following is to stop our object not to go outside of the canvas
-                //if (this.happyServerVM.TopSize > this.HappyServer.Height /*&& this.happyServerVM.TopSize < this.Field.ActualHeight*/)
-                //{
-                //    Canvas.SetTop(HappyServer, newTop);
-                //}
+                // the following is to stop our object not to go outside of the canvas
+                if (newTop < this.HappyHttpCanvas.ActualHeight - 25 && newTop > 0)
+                {
+                    this.ViewModel.Player.Top = newTop;
+                }
 
-                //if (this.happyServerVM.LeftSize > this.HappyServer.Width /*&& this.happyServerVM.LeftSize < this.Field.ActualWidth*/)
-                //{
-                //    Canvas.SetLeft(HappyServer, newLeft);
-                //}
+                if (newLeft < this.HappyHttpCanvas.ActualWidth - 25 && newLeft > 0)
+                {
+                    this.ViewModel.Player.Left = newLeft;
+                }
             });
         }
 
@@ -206,7 +209,7 @@
 
         private void HappyServer_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            //this.musicClick.Play();
+            this.musicClick.Play();
         }
 
         private async void OnButtonClickEnd(object sender, RoutedEventArgs e)
@@ -215,11 +218,15 @@
         }
 
         private void Canvas_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
+        {           
+            var change = 0.1 * (this.ViewModel.Player.Size * e.Delta.Scale);
 
-            this.ViewModel.Player.Scale *= e.Delta.Scale;
-            this.ViewModel.Player.Size *= this.ViewModel.Player.Scale;
-
+            if (change < 3 && change > -3 )
+            {
+                this.ViewModel.Player.Scale *= e.Delta.Scale;
+                this.ViewModel.Player.Size *=change;
+            }
+            change = 0;
         }
 
         private void Canvas_Tapped(object sender, TappedRoutedEventArgs e)
