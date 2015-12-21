@@ -34,32 +34,32 @@
             this.mediaPlayer.Play();
             GenerateContacts();
 
-            this.DataContext = new FieldViewModel(200, 200);
-            var viewModel = this.DataContext as FieldViewModel/*(this.GridContainer.RowDefinitions[1].ActualHeight 200,200 this.GridContainer.ActualWidth)*/;
+            //this.DataContext = new FieldViewModel(200, 200);
+            //var viewModel = this.DataContext as FieldViewModel/*(this.GridContainer.RowDefinitions[1].ActualHeight 200,200 this.GridContainer.ActualWidth)*/;
 
-            // enemy
-            var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1000 * Constants.BadRequestFrequency);
-            var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            //// enemy
+            //var timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(1000 * Constants.BadRequestFrequency);
+            //var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            //var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer.Tick += (snd, arg) =>
-            {
-                viewModel.AddEnemy(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            };
-            timer.Start();
+            //timer.Tick += (snd, arg) =>
+            //{
+            //    viewModel.AddEnemy(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            //};
+            //timer.Start();
 
-            // friendly
-            var timer2 = new DispatcherTimer();
-            timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
-            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
+            //// friendly
+            //var timer2 = new DispatcherTimer();
+            //timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
+            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
+            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer2.Tick += (snd, arg) =>
-            {
-                viewModel.AddFriendlyObjects(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            };
-            timer2.Start();
+            //timer2.Tick += (snd, arg) =>
+            //{
+            //    viewModel.AddFriendlyObjects(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+            //};
+            //timer2.Start();
 
             this.happyServerVM = new TokenServerViewModel();
             this.DataContext = this.happyServerVM;
@@ -173,38 +173,38 @@
             Frame.Navigate(typeof(FinalPage));
         }
 
-        private void HappyServer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
+        //private void HappyServer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        //{
 
-            //validation and casting
-            var element = sender as UIElement;
+        //    //validation and casting
+        //    var element = sender as UIElement;
 
-            if (element == null)
-            {
-                return;
-            }
+        //    if (element == null)
+        //    {
+        //        return;
+        //    }
 
-            // create transfrom
-            element.RenderTransform = new ScaleTransform();
-            element.RenderTransformOrigin = new Point(0.5, 0.5);
-            var transform = element.RenderTransform as ScaleTransform;
+        //    // create transfrom
+        //    element.RenderTransform = new ScaleTransform();
+        //    element.RenderTransformOrigin = new Point(0.5, 0.5);
+        //    var transform = element.RenderTransform as ScaleTransform;
 
-            var sizeChange = e.Delta.Scale;
+        //    var sizeChange = e.Delta.Scale;
 
-            transform.ScaleX += sizeChange;
-            transform.ScaleY += sizeChange;
+        //    transform.ScaleX += sizeChange;
+        //    transform.ScaleY += sizeChange;
 
-            var delta = e.Delta;
+        //    var delta = e.Delta;
 
-            var x = delta.Translation.X;
-            var y = delta.Translation.Y;
+        //    var x = delta.Translation.X;
+        //    var y = delta.Translation.Y;
 
-            var viewModeld = this.DataContext as GameObjectViewModel;
-            if (viewModeld.Left + x < 0)
-            { return; }
-            viewModeld.Top += y;
-            viewModeld.Left += x;
+        //    var viewModeld = this.DataContext as GameObjectViewModel;
+        //    if (viewModeld.Left + x < 0)
+        //    { return; }
+        //    viewModeld.Top += y;
+        //    viewModeld.Left += x;
 
-        }
+        //}
     }
 }
