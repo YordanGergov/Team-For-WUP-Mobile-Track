@@ -8,13 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="GridContainer">
+    <Grid x:Name="GridContainer" Background="Pink">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Play Page" Grid.Row="0" VerticalAlignment="Stretch"></TextBlock>
-        <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="70">
+        <MediaElement Name="mediaPlayer" Source="http://www.tradebit.com/usr/plpdownloads/pub/3005/Reese-Attack-Demo.mp3" Volume="30">
         </MediaElement>
         
 
@@ -43,11 +43,15 @@
         <Canvas>
             <Ellipse Name="HappyServer" HorizontalAlignment="Center" VerticalAlignment="Center"
 		   Height="25" Width="25" Stroke="Azure" Canvas.Left="50" Canvas.Top="50"
-            RenderTransformOrigin="0.5, 0.5" Fill="{StaticResource HappyServer}">
+            RenderTransformOrigin="0.5, 0.5" Fill="{StaticResource HappyServer}"
+                     DoubleTapped="HappyServer_DoubleTapped"
+                     ManipulationDelta="HappyServer_ManipulationDelta">
                 <!--<Ellipse.RenderTransform>
                     <ScaleTransform ScaleX="{Binding Path=Width}" ScaleY="{Binding Path=Width}"/>
                 </Ellipse.RenderTransform>-->
             </Ellipse>
+            <MediaElement Name="musicClick" Source="http://www.pachd.com/a/button/button1.wav" Volume="70">
+            </MediaElement>
         </Canvas>
     </Grid>
 </Page>

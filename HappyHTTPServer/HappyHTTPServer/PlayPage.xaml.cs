@@ -22,7 +22,7 @@
     using Helpers;
     using Windows.ApplicationModel.Contacts;
     using Windows.Phone.PersonalInformation;
-
+    using ViewModels.Objects;
     public sealed partial class PlayPage : Page
     {
         private Accelerometer accelerometer;
@@ -39,7 +39,7 @@
             // enemy
             var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1000 * Constants.BadRequestFrequency);
-            var objectsCount = 10; /*this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;*/
+            var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
             var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
             timer.Tick += (snd, arg) =>
@@ -51,7 +51,7 @@
             // friendly
             var timer2 = new DispatcherTimer();
             timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
-            objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
+            objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
             randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
             timer2.Tick += (snd, arg) =>
@@ -67,17 +67,9 @@
             this.accelerometer.ReadingChanged += new TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>(ReadingChanged);
         }
 
-        public FieldViewModel ViewModel
-        {
-            get
-            {
-               return this.DataContext as FieldViewModel;
-            }
-        }
-
         async private void ReadingChanged(object Accelerometer, AccelerometerReadingChangedEventArgs e)
         {
-           
+
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 AccelerometerReading reading = e.Reading;
@@ -168,6 +160,45 @@
                 allContacts = await contactsStore.FindContactsAsync();
                 contactAsList = allContacts.ToList();
             }
+        }
+
+        private void HappyServer_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+                this.musicClick.Play();          
+        }
+
+        private void HappyServer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+            //validation and casting
+            var element = sender as UIElement;
+
+            if (element == null)
+            {
+                return;
+            }
+
+            // create transfrom
+            element.RenderTransform = new ScaleTransform();
+            element.RenderTransformOrigin = new Point(0.5, 0.5);
+            var transform = element.RenderTransform as ScaleTransform;
+
+            var sizeChange = e.Delta.Scale;
+
+            transform.ScaleX += sizeChange;
+            transform.ScaleY += sizeChange;
+
+            var delta = e.Delta;
+
+            var x = delta.Translation.X;
+            var y = delta.Translation.Y;
+
+            var viewModeld = this.DataContext as GameObjectViewModel;
+            if (viewModeld.Left + x < 0)
+            { return; }
+            viewModeld.Top += y;
+            viewModeld.Left += x;
+
         }
     }
 }

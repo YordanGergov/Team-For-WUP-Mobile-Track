@@ -190,12 +190,20 @@
         public void AddEnemy(double top, double left, string img)
         {
             var enemy = new GameObjectViewModel(top, left, img, false);
+            if (this.enemies == null)
+            {
+                this.enemies = new ObservableCollection<GameObjectViewModel>();
+            }
             this.enemies.Add(enemy);
         }
 
         public void AddFriendlyObjects(double top, double left, string img)
         {
             var friendlyObject = new GameObjectViewModel(top, left, img, true);
+            if (this.friendlyObjects == null)
+            {
+                this.friendlyObjects = new ObservableCollection<GameObjectViewModel>();
+            }
             this.friendlyObjects.Add(friendlyObject);
         }       
     }
