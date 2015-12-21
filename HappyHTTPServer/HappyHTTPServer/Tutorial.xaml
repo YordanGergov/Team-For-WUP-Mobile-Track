@@ -401,8 +401,7 @@
                 <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="2nd page successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                        The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
+                    Text="We move our Happy HTTP Server with the Accelerometer. He must avoid the bad HTTP requests."
                     Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
                 </Grid>
@@ -414,8 +413,7 @@
                 <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="3rd page he successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                        The successfull requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
+                    Text="The successfull requests will actually be from your friends listed in the contact list and are good for you. There will be also security updates, which provide a bonus as well."
                     Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
                 </Grid>
@@ -427,8 +425,7 @@
                 <Grid Background="#FEFEA7" >
                     <TextBlock
                     TextWrapping="Wrap" 
-                    Text="4th page The successful requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music.
-                        The successful requests will actually be from your friends listed in the contact list. At the end of each level there will be information for which friend has helped you the most. We use Geolocation to determine the city from which you start. There will be music."
+                    Text="As a bonus and if you want to educate yourself, when you click the Encyclopedia button you will see all the status codes which you can get! Thank Wikipedia for that!"
                     Style="{StaticResource TutotialTextStyle}">
                     </TextBlock>
                 </Grid>

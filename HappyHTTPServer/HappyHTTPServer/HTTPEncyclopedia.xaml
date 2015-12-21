@@ -25,6 +25,8 @@
         <ScrollViewer Margin="10,61,10,10">
             <TextBlock x:Name="ResultTextBlock" TextWrapping="Wrap" Text="" />
         </ScrollViewer>
+        <ProgressRing x:Name="ProggressRing" Foreground="Yellow" 
+                          Width="80" Height="80"></ProgressRing>
     </Grid>
     
 </Page>
