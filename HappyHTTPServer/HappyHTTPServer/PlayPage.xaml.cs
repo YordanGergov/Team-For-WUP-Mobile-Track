@@ -43,6 +43,7 @@
             //var objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
             //var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
+            /// 
             //timer.Tick += (snd, arg) =>
             //{
             //    viewModel.AddEnemy(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
