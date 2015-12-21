@@ -54,6 +54,7 @@
                 }
                 this.enemies.Clear();
                 this.enemies.ForEach(this.enemies.Add);
+                this.OnPropertyChanged("FriendlyObjects");
             }
         }
 
@@ -75,6 +76,7 @@
                 }
                 this.friendlyObjects.Clear();
                 this.enemies.ForEach(this.enemies.Add);
+                this.OnPropertyChanged("FriendlyObjects");
             }
         }
 
@@ -191,7 +193,7 @@
             this.enemies.Add(enemy);
         }
 
-        public void AddFriendlyObjectse(double top, double left, string img)
+        public void AddFriendlyObjects(double top, double left, string img)
         {
             var friendlyObject = new GameObjectViewModel(top, left, img, true);
             this.friendlyObjects.Add(friendlyObject);

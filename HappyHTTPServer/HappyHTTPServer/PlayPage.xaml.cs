@@ -33,29 +33,32 @@
             this.InitializeComponent();
             this.mediaPlayer.Play();
 
-            this.DataContext = new FieldViewModel(/*this.GridContainer.RowDefinitions[1].ActualHeight*/200,200 /*this.GridContainer.ActualWidth*/);
+            this.DataContext = new FieldViewModel(200, 200);
+            var viewModel = this.DataContext as FieldViewModel/*(this.GridContainer.RowDefinitions[1].ActualHeight 200,200 this.GridContainer.ActualWidth)*/;
 
             // enemy
             var timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
+            timer.Interval = TimeSpan.FromMilliseconds(1000 * Constants.BadRequestFrequency);
             var objectsCount = 10; /*this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;*/
             var randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
             timer.Tick += (snd, arg) =>
             {
-                this.ViewModel.AddEnemy(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+                viewModel.AddEnemy(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
             };
+            timer.Start();
 
             // friendly
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
+            var timer2 = new DispatcherTimer();
+            timer2.Interval = TimeSpan.FromMilliseconds(1000 * Constants.SecurityUpgradesFrequency);
             objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
             randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
 
-            timer.Tick += (snd, arg) =>
+            timer2.Tick += (snd, arg) =>
             {
-                this.ViewModel.AddFriendlyObjectse(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
+                viewModel.AddFriendlyObjects(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
             };
+            timer2.Start();
 
             this.happyServerVM = new TokenServerViewModel();
             this.DataContext = this.happyServerVM;
