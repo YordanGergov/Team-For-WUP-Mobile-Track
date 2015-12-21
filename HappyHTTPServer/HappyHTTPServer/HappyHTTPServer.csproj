@@ -109,7 +109,7 @@
       <DependentUpon>HTTPEncyclopedia.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomViews\CanvasListView.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Tutorial.xaml.cs">
       <DependentUpon>Tutorial.xaml</DependentUpon>

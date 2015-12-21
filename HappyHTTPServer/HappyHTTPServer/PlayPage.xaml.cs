@@ -33,10 +33,9 @@
             this.InitializeComponent();
             this.mediaPlayer.Play();
 
-            // BadRequests
+            this.DataContext = new FieldViewModel(/*this.GridContainer.RowDefinitions[1].ActualHeight*/200,200 /*this.GridContainer.ActualWidth*/);
 
-            this.DataContext = new FieldViewModel();
-
+            // enemy
             var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.BadRequestFrequency);
             var objectsCount = 10; /*this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;*/
@@ -47,7 +46,7 @@
                 this.ViewModel.AddEnemy(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
             };
 
-            // securityUpgrade
+            // friendly
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.SecurityUpgradesFrequency);
             objectsCount = this.ViewModel.CountObjectsInHeight * 2 + this.ViewModel.CountObjectsInWidth * 2;
@@ -57,20 +56,6 @@
             {
                 this.ViewModel.AddFriendlyObjectse(this.ViewModel.FieldCoordinates[randomCoordinate][0], this.ViewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
             };
-
-            //// friendHttpRequests
-            //timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(10000 * Constants.HttpFriendRequestsFrequency);
-            //objectsCount = viewModel.CountObjectsInHeight * 2 + viewModel.CountObjectsInWidth * 2;
-            //randomCoordinate = Generator.GetRandomNumber(0, objectsCount);
-
-            //timer.Tick += (snd, arg) =>
-            //{
-            //    viewModel.AddFriendHttpRequest(viewModel.FieldCoordinates[randomCoordinate][0], viewModel.FieldCoordinates[randomCoordinate][1], "imgstring");
-            //};
-
-            ////трябва ми метода за колизия да гу мушна, но първо обектите
-            ////сори за БГ-то - много ме мързи - утре тези коментари ще ги няма
 
             this.happyServerVM = new TokenServerViewModel();
             this.DataContext = this.happyServerVM;

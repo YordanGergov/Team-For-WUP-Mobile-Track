@@ -26,18 +26,24 @@
 
         private ObservableCollection<GameObjectViewModel> enemies;
         private ObservableCollection<GameObjectViewModel> friendlyObjects;
-        private bool friendly;
 
-        public FieldViewModel()
+        public FieldViewModel(double height, double width)
         {
+            this.Height = height;
+            this.Width = width;
             this.CountObjectsInHeight = (int)this.Height / 25 - 1;
             this.CountObjectsInWidth = (int)this.Width / 25 - 1;
+            this.fieldCoordinates = GenerateCoordinatesField(this.Width, this.Height);
         }
 
         public IEnumerable<GameObjectViewModel> Enemies
         {
             get
             {
+                if(this.enemies == null)
+                {
+                    this.enemies = new ObservableCollection<GameObjectViewModel>();
+                }
                 return this.enemies;
             }
             set
@@ -47,7 +53,7 @@
                     this.enemies = new ObservableCollection<GameObjectViewModel>();
                 }
                 this.enemies.Clear();
-                this.enemies.AddRange(value);
+                this.enemies.ForEach(this.enemies.Add);
             }
         }
 
@@ -55,6 +61,10 @@
         {
             get
             {
+                if (this.friendlyObjects == null)
+                {
+                    this.friendlyObjects = new ObservableCollection<GameObjectViewModel>();
+                }
                 return this.friendlyObjects;
             }
             set
@@ -64,7 +74,7 @@
                     this.friendlyObjects = new ObservableCollection<GameObjectViewModel>();
                 }
                 this.friendlyObjects.Clear();
-                this.friendlyObjects.AddRange(value);
+                this.enemies.ForEach(this.enemies.Add);
             }
         }
 
@@ -128,7 +138,7 @@
             }
             set
             {
-                this.fieldCoordinates = GenerateCoordinatesField(this.Width, this.Height);
+                this.fieldCoordinates = value;
                 this.OnPropertyChanged("FieldCoordinates");
             }
         }
@@ -149,25 +159,28 @@
                 count = count + 1;
             }
 
+            var count1 = count;
             //// left 
             for (int i = count; i < countObjectsInHeight + count; i++)
             {
                 output[i] = new double[] { (countTop + i * Constants.DefaultGameObjectRadius), 0 };
-                count = count + 1;
+                count1 = count1 + 1;
             }
 
+            var count2 = count1;
             //// bottom 
-            for (int i = count; i < countObjectsInWidth + count; i++)
+            for (int i = count1; i < countObjectsInWidth + count1; i++)
             {
                 output[i] = new double[] { (fieldHeight - Constants.DefaultGameObjectRadius), (countLeft + i * Constants.DefaultGameObjectRadius) };
-                count = count + 1;
+                count2 = count2 + 1;
             }
 
+            var count3 = count2;
             //// right 
-            for (int i = count; i < countObjectsInHeight + count; i++)
+            for (int i = count2; i < countObjectsInHeight + count2; i++)
             {
                 output[i] = new double[] { (countTop + i * Constants.DefaultGameObjectRadius), (fieldHeight - Constants.DefaultGameObjectRadius) };
-                count = count + 1;
+                count3 = count3 + 1;
             }
             return output;
         }
