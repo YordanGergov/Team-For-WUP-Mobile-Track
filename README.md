@@ -28,14 +28,14 @@ There will be music.
 
 #####Initial Page
 
-![initial page](https://raw.githubusercontent.com/alexizvely/Team-For-WUP-Mobile-Track/master/Documentation%20Helpers/FirstPage.jpg)
+
 #####How to Play Pages 
 (three pages that will explain the rules of the game) - you will swipe through these pages
 
 #####Play Page
 
 explanation on the side numbers: there will be numbers in the colours of the object that is coming with information after how many seconds this object will comm from this side.
-![play page](https://raw.githubusercontent.com/alexizvely/Team-For-WUP-Mobile-Track/master/Documentation%20Helpers/PlayPage.jpg)
+
 
 ####Details:
 We will save current level (per city) and Best Score in Local Storage (SQLite)
