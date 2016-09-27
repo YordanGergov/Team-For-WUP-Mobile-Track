@@ -9,7 +9,7 @@ Teamwork for Telerik Academy 2015
 Youtube: 
 
 ###Project information:
-Our user will be Happy HTTP Server, whose goela will be to do as much work as possible. 
+Our user will be Happy HTTP Server, who will have to do as much work as possible. 
 The server will have work goals, which will consist of how many successfull requests will need to be processed in order to get to the next level.
 However, there will be bad requests that will need to be avoided and security updates that boosts up for some time the successfull requests.
 There will be different cities, in which our Happy HTTP Server will need to work. If you complete a certain level in all cities - you get a bonus level.
